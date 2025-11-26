@@ -1,5 +1,6 @@
+import { Call } from 'src/call/entities/call.entity';
 import { Role } from 'src/roles/roles.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -12,7 +13,19 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  fullName: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  isActive: boolean;
+
   @ManyToMany(() => Role)
   @JoinTable()
   roles: Role[];
+
+  @OneToMany(() => Call, (call) => call.user)
+  calls: Call[];
 }

@@ -16,7 +16,7 @@ async function bootstrap() {
   // vérifier si le rôle ADMIN existe
   let adminRole = await roleRepo.findOne({ where: { name: 'ADMIN' } });
   if (!adminRole) {
-    adminRole = await roleRepo.save({ name: 'ADMIN' });
+    adminRole = await roleRepo.save({ name: 'ADMIN', description: 'Administrateur absolu du système' });
     console.log('✅ Role ADMIN créé');
   }
 
@@ -27,6 +27,9 @@ async function bootstrap() {
     await userService.create({
       username: 'admin',
       password: hashedPassword,
+      fullName: 'Administrator',
+      email: 'infrastructure@inhome-insol.com',
+      isActive: true,
       roles: [adminRole], // ici on lie le rôle existant
     });
     console.log('✅ Admin user créé: admin / admin123');

@@ -12,8 +12,8 @@ import { UsersModule } from '../users/users.module';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: 'superSecretKey', // à mettre dans .env
-      signOptions: { expiresIn: '1h' },
+      secret: 'eyJ1c2VybmFtZSI6Im20upd26$', // à mettre dans .env
+      signOptions: { expiresIn: '165h' },
     }),
   ],
   controllers: [AuthController],
