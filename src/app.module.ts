@@ -17,16 +17,20 @@ import { Lead } from './leads/entities/lead.entity';
 import { CallStatus } from './call_status/entities/call_status.entity';
 import { CallXCallStatus } from './call_x_call_status/entities/call_x_call_status.entity';
 import { Call } from './call/entities/call.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'postgres',
-      database: 'dcix_db',
+      host: process.env.DATABASE_HOST as string,
+      port: process.env.DATABASE_PORT ? parseInt(process.env.DATABASE_PORT) : 5432,
+      username: process.env.DATABASE_USER as string,
+      password: process.env.DATABASE_PASSWORD as string,
+      database: process.env.DATABASE_NAME as string,
       entities: [
         User,
         Role, 

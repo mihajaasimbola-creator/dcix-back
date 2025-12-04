@@ -34,7 +34,10 @@ async function bootstrap() {
     });
     console.log('✅ Admin user créé: admin / admin123');
   }
-
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
+  });
   // ---- START SERVER ----
   app.useGlobalInterceptors(new LoggingInterceptor());
   await app.listen(3000);
