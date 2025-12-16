@@ -8,6 +8,6 @@ export class Role {
   @Column({ unique: true })
   name: string;
 
-  @Column({unique : true, nullable: true})
+  @Column({ unique: true, nullable: true })
   description: string;
 }

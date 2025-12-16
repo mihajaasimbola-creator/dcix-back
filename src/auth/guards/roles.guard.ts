@@ -2,7 +2,7 @@ import {
   Injectable,
   CanActivate,
   ExecutionContext,
-  ForbiddenException
+  ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from '../decorators/roles.decorator';
@@ -12,11 +12,10 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const requiredRoles =
-      this.reflector.getAllAndOverride<string[]>(ROLES_KEY, [
-        context.getHandler(),
-        context.getClass(),
-      ]);
+    const requiredRoles = this.reflector.getAllAndOverride<string[]>(
+      ROLES_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     if (!requiredRoles) return true;
 
@@ -27,9 +26,11 @@ export class RolesGuard implements CanActivate {
     }
 
     // Normaliser : transformer ton tableau d'objets en tableau de strings
-    const userRoles = user.roles?.map(r => typeof r === 'string' ? r : r.name);
+    const userRoles = user.roles?.map((r) =>
+      typeof r === 'string' ? r : r.name,
+    );
 
-    const hasRole = requiredRoles.some(role => userRoles.includes(role));
+    const hasRole = requiredRoles.some((role) => userRoles.includes(role));
 
     if (!hasRole) {
       throw new ForbiddenException('Insufficient role');
@@ -38,4 +39,3 @@ export class RolesGuard implements CanActivate {
     return true;
   }
 }
-

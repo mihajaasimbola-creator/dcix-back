@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { LeadSourceService } from './lead_source.service';
 import { CreateLeadSourceDto } from './dto/create-lead_source.dto';
 import { UpdateLeadSourceDto } from './dto/update-lead_source.dto';
@@ -23,7 +31,10 @@ export class LeadSourceController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLeadSourceDto: UpdateLeadSourceDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateLeadSourceDto: UpdateLeadSourceDto,
+  ) {
     return this.leadSourceService.update(+id, updateLeadSourceDto);
   }
 

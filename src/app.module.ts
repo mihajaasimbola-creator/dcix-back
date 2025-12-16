@@ -27,19 +27,21 @@ import { ConfigModule } from '@nestjs/config';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST as string,
-      port: process.env.DATABASE_PORT ? parseInt(process.env.DATABASE_PORT) : 5432,
+      port: process.env.DATABASE_PORT
+        ? parseInt(process.env.DATABASE_PORT)
+        : 5432,
       username: process.env.DATABASE_USER as string,
       password: process.env.DATABASE_PASSWORD as string,
       database: process.env.DATABASE_NAME as string,
       entities: [
         User,
-        Role, 
-        LeadSource, 
-        GeographicZone, 
-        Lead, 
+        Role,
+        LeadSource,
+        GeographicZone,
+        Lead,
         CallStatus,
         CallXCallStatus,
-        Call
+        Call,
       ],
       synchronize: true, // en dev, auto-crée les tables
     }),

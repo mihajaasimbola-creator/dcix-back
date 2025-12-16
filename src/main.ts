@@ -16,7 +16,10 @@ async function bootstrap() {
   // vérifier si le rôle ADMIN existe
   let adminRole = await roleRepo.findOne({ where: { name: 'ADMIN' } });
   if (!adminRole) {
-    adminRole = await roleRepo.save({ name: 'ADMIN', description: 'Administrateur absolu du système' });
+    adminRole = await roleRepo.save({
+      name: 'ADMIN',
+      description: 'Administrateur absolu du système',
+    });
     console.log('✅ Role ADMIN créé');
   }
 

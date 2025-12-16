@@ -1,6 +1,13 @@
 import { Call } from 'src/call/entities/call.entity';
 import { Role } from 'src/roles/roles.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToMany,
+  JoinTable,
+  OneToMany,
+} from 'typeorm';
 
 @Entity('users')
 export class User {

@@ -7,7 +7,6 @@ import { RoleDto } from 'src/roles/dto/role.dto';
 import { CreateUserDto } from './dto/create-user-dto';
 import * as bcrypt from 'bcrypt';
 
-
 @Injectable()
 export class UsersService {
   constructor(
@@ -16,16 +15,18 @@ export class UsersService {
     private readonly roleRepository: Repository<Role>,
 
     // Repository de l'utilisateur pour les opérations sur les utilisateurs
-    @InjectRepository(User) 
+    @InjectRepository(User)
     private userRepo: Repository<User>,
 
     // EntityManager pour les transactions complexes si nécessaire
-    @InjectEntityManager() private readonly em : EntityManager
-
+    @InjectEntityManager() private readonly em: EntityManager,
   ) {}
 
   findAll() {
-    return this.userRepo.find({ relations: ['roles'] });
+    return this.userRepo.find({
+      select: ['id', 'username', 'fullName', 'email', 'isActive'], // pas de password
+      relations: ['roles'],
+    });
   }
 
   findByUsername(username: string) {
@@ -57,7 +58,7 @@ export class UsersService {
           fullName: dto.fullName,
           email: dto.email,
           isActive: dto.isActive,
-          roles: roles,  // assigner les rôles
+          roles: roles, // assigner les rôles
         });
 
         // 4️⃣ Sauvegarder
@@ -68,6 +69,10 @@ export class UsersService {
 
       return createdUsers;
     });
+  }
+
+  async deleteUser(userId: number) {
+    this.userRepo.delete(userId);
   }
 
   async createRoles(roles: RoleDto[]) {

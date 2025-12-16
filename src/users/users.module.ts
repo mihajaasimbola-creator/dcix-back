@@ -6,8 +6,7 @@ import { UsersController } from './users.controller';
 import { Role } from 'src/roles/roles.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Role,User])], // <-- obligatoire pour injecter UserRepository
+  imports: [TypeOrmModule.forFeature([Role, User])], // <-- obligatoire pour injecter UserRepository
   providers: [UsersService],
   controllers: [UsersController],
   exports: [UsersService], // <-- utile si AuthModule a besoin de UsersService

@@ -25,7 +25,8 @@ export class LoggingInterceptor implements NestInterceptor {
           if (statusCode >= 500) logColor = chalk.red;
           else if (statusCode === 401) logColor = chalk.red;
           else if (statusCode === 404) logColor = chalk.yellow;
-          else if (statusCode === 200 || statusCode === 201) logColor = chalk.green;
+          else if (statusCode === 200 || statusCode === 201)
+            logColor = chalk.green;
 
           console.log(
             logColor(

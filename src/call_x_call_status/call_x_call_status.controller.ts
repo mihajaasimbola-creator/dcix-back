@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CallXCallStatusService } from './call_x_call_status.service';
 import { CreateCallXCallStatusDto } from './dto/create-call_x_call_status.dto';
 import { UpdateCallXCallStatusDto } from './dto/update-call_x_call_status.dto';
 
 @Controller('call-x-call-status')
 export class CallXCallStatusController {
-  constructor(private readonly callXCallStatusService: CallXCallStatusService) {}
+  constructor(
+    private readonly callXCallStatusService: CallXCallStatusService,
+  ) {}
 
   @Post()
   create(@Body() createCallXCallStatusDto: CreateCallXCallStatusDto) {
@@ -23,7 +33,10 @@ export class CallXCallStatusController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCallXCallStatusDto: UpdateCallXCallStatusDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCallXCallStatusDto: UpdateCallXCallStatusDto,
+  ) {
     return this.callXCallStatusService.update(+id, updateCallXCallStatusDto);
   }
 

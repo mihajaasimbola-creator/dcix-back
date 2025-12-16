@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { GeographicZoneService } from './geographic_zone.service';
 import { CreateGeographicZoneDto } from './dto/create-geographic_zone.dto';
 import { UpdateGeographicZoneDto } from './dto/update-geographic_zone.dto';
@@ -23,7 +31,10 @@ export class GeographicZoneController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGeographicZoneDto: UpdateGeographicZoneDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateGeographicZoneDto: UpdateGeographicZoneDto,
+  ) {
     return this.geographicZoneService.update(+id, updateGeographicZoneDto);
   }
 
