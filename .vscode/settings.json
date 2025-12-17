@@ -14,5 +14,8 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "typescript.tsserver.log": "off",
+  "typescript.reportStyleChecksAsWarnings": true,
+  "javascript.reportStyleChecksAsWarnings": true
 }

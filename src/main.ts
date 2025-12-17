@@ -3,11 +3,17 @@ import { AppModule } from './app.module';
 import { UsersService } from './users/users.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import * as bodyParser from 'body-parser';
+
 import { Role } from './roles/roles.entity';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Taille maximale et extendes
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   // ---- SEED ADMIN ----
   const userService = app.get(UsersService);

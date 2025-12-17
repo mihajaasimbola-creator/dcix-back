@@ -8,24 +8,26 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Index,
 } from 'typeorm';
 
 @Entity()
+@Index('UQ_lead_telephone', ['telephone'], { unique: true })
 export class Lead {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   name: string;
 
-  @Column({ length: 255 })
+  @Column({ length: 255, nullable: true })
   email: string;
 
-  @Column({ length: 255 })
-  phone_number: string;
+  @Column({ length: 50, nullable: true })
+  telephone: string;
 
   // ================================
-  // RELATION ManyToOne → GeographicZone
+  // Geographic Zone
   // ================================
   @ManyToOne(() => GeographicZone, (zone) => zone.leads, { eager: true })
   @JoinColumn({ name: 'geographic_zone_id' })
@@ -35,13 +37,13 @@ export class Lead {
   geographic_zone_id: number;
 
   // ================================
-  // RELATION ManyToOne → LeadSource
+  // Lead Source
   // ================================
   @ManyToOne(() => LeadSource, (source) => source.leads, { eager: true })
   @JoinColumn({ name: 'lead_source_id' })
   leadSource: LeadSource;
 
-  @Column()
+  @Column({ nullable: true })
   lead_source_id: number;
 
   @OneToMany(() => Call, (call) => call.lead)

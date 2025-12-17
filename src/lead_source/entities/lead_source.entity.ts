@@ -19,9 +19,14 @@ export class LeadSource {
   @Column({ length: 255 })
   email: string;
 
+  @Column({ length: 255 })
+  telephone: string;
+
   @Column({ length: 500 })
   site_url: string;
 
+  @Column({ length: 1000, nullable: true })
+  note: string;
   @CreateDateColumn()
   created_at: Date;
 

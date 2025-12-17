@@ -34,6 +34,8 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn', // jaune au lieu de rouge
+      '@typescript-eslint/parameter-properties': 'off',
       'prettier/prettier': [
         'error',
         {

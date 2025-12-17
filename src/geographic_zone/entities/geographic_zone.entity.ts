@@ -9,7 +9,7 @@ export class GeographicZone {
   designation: string;
 
   @Column({})
-  location_permietters: string;
+  location_perimeters: string;
 
   @Column({ length: 500 })
   location_middle: string;
